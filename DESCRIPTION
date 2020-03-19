@@ -1,5 +1,5 @@
 Package: swigr
-Title: What the Package Does (One Line, Title Case)
+Title: An example R package using SWIG to wrap C++
 Version: 0.0.1
 Authors@R: 
     person(given = "First",
@@ -7,8 +7,12 @@ Authors@R:
            role = c("aut", "cre"),
            email = "first.last@example.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+Description: A simple example repo to test making an R package
+  from C++ code using SWIG to generate wrapper code. The goal is
+  to make it easy to install for both Linux, MacOS and Windows
+  users. Windows users should be able to install a binary package
+  to not require tools to compile the C++ code.
+License: AGPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0

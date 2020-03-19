@@ -20,6 +20,9 @@ setwd("~/dev/R/swig")
 devtools::install("swigr")
 setwd("~/dev/R/swig/swigr")
 
+# Install local binary bundle
+devtools::install_url("file:///Users/Daniel/dev/R/swig/swigr_bin_man.tgz")
+
 # Test package
 swigr::test_r()
 swigr::test_example()

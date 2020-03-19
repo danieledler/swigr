@@ -5,8 +5,20 @@
 # source("example.R")
 # cacheMetaData(1)
 
+search()
+#detach(package:swig, unload = TRUE)
+
 install.packages("devtools")
+
+# Install from github
 devtools::install_github("danieledler/swigr")
+
+# Install source bundle from URL
+devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.1/swigr_0.0.1.tar.gz")
+
+# Install binary bundle from URL
+devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.1/swigr_0.0.1.tgz")
+
 
 swigr::test_example()
 

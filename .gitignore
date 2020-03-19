@@ -1,3 +1,7 @@
 *.o
 *.so
 .Rhistory
+*.Rcheck
+.Rproj.user
+*.tgz
+*.tar.gz
