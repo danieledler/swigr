@@ -1,21 +1,26 @@
 # This file illustrates the proxy class C++ interface generated
-# by SWIG.
+# by SWIG, with some additional R functions added to the package
 
 # dyn.load(paste("example", .Platform$dynlib.ext, sep=""))
 # source("example.R")
 # cacheMetaData(1)
 
+install.packages("devtools")
+devtools::install_github("danieledler/swigr")
+
+swigr::test_example()
+
 # ----- Object creation -----
 
 print("Creating some objects:")
-circle <- Circle(10)
+circle <- swigr::Circle(10)
 print ("    Created circle")
-square <- Square(10)
+square <- swigr::Square(10)
 print ("    Created square")
 
 # ----- Access a static member -----
 
-sprintf("A total of %d shapes were created", Shape_nshapes())
+sprintf("A total of %d shapes were created", swigr::Shape_nshapes())
 
 # ----- Member data access -----
 
@@ -44,8 +49,8 @@ sprintf("       area = %f perimeter = %f", o$area(),  o$perimeter())
 })
 
 print("Guess I'll clean up now")
-delete(circle)
-delete(square)
+swigr::delete(circle)
+swigr::delete(square)
 
-sprintf("%d shapes remain", Shape_nshapes())
-print ("Goodbye");
+sprintf("%d shapes remain", swigr::Shape_nshapes())
+print ("Goodbye")
