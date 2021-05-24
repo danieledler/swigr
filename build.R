@@ -7,6 +7,7 @@ vignette("namespace")
 setwd("~/dev/R/swig")
 devtools::create("swigr")
 
+setwd("~/dev/R/projects/swigr")
 usethis::use_vignette("introduction")
 
 devtools::document()

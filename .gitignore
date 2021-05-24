@@ -5,3 +5,5 @@
 .Rproj.user
 *.tgz
 *.tar.gz
+inst/doc
+.Rbuildignore
