@@ -17,10 +17,23 @@ devtools::install_github("danieledler/swigr")
 Binary bundle can be installed from R by running
 
 ```R
-devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.1/swigr_0.0.1.tgz")
+devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.1/swigr_0.0.1b.tgz")
 ```
 
+## Issues
 
+R packages can be in [five different states](https://r-pkgs.org/package-structure-state.html):
+* source
+* bundled
+* binary
+* installed
+* in-memory
+
+`devtools::build()` creates a bundled package and can be installed with `devtools::install_github("danieledler/swigr")`. However, the C++ source code is included in a `src` directory and will be compiled on the user's computer, which creates problems for many Windows users.
+
+`devtools::build(binary = T)` creates a binary package that instead of a `src` folder has a `libs` folder with the C++ code compiled to a shared library. This is required for `devtools::install_url("...")` to work, but `install_url` also require a `man` folder which is not present when building a binary package.
+
+CRAN makes binaries available from bundles and includes a man folder.
 ## TODO
 
 * Add `zzz.R` with `.onUnload()` to clean SWIG?
