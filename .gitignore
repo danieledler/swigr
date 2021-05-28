@@ -3,6 +3,7 @@
 .Rhistory
 *.Rcheck
 .Rproj.user
+.RData
 *.tgz
 *.tar.gz
 inst/doc

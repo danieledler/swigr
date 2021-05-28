@@ -34,6 +34,13 @@ R packages can be in [five different states](https://r-pkgs.org/package-structur
 `devtools::build(binary = T)` creates a binary package that instead of a `src` folder has a `libs` folder with the C++ code compiled to a shared library. This is required for `devtools::install_url("...")` to work, but `install_url` also require a `man` folder which is not present when building a binary package.
 
 CRAN makes binaries available from bundles and includes a man folder.
+
+### Cheat sheet
+[Package Development:: CHEAT SHEET](https://rawgit.com/rstudio/cheatsheets/master/package-development.pdf)
 ## TODO
 
 * Add `zzz.R` with `.onUnload()` to clean SWIG?
+* Use Github Actions to build R package
+    * https://docs.github.com/en/actions/using-github-hosted-runners/customizing-github-hosted-runners
+    * https://blog--simonpcouch.netlify.app/blog/r-github-actions-commit/
+    

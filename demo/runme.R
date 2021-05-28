@@ -11,13 +11,14 @@ search()
 install.packages("devtools")
 
 # Install from github
-devtools::install_github("danieledler/swigr")
+# devtools::install_github("danieledler/swigr")
 
 # Install source bundle from URL
-devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.1/swigr_0.0.1.tar.gz")
+# devtools::install_url("file:///Users/Daniel/dev/projects/swigr/tmp/binary2/swigr_0.0.1.tgz")
+devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.1/swigr_0.0.1_man.tgz")
 
 # Install binary bundle from URL
-devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.1/swigr_0.0.1.tgz")
+#devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.1/swigr_0.0.1.tgz")
 
 
 swigr::test_example()

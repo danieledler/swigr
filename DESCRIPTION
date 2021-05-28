@@ -23,3 +23,4 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+SystemRequirements: C++14

@@ -1,3 +1,6 @@
+#ifndef SHAPE_H
+#define SHAPE_H
+
 class Shape {
 public:
   Shape() {
@@ -32,3 +35,5 @@ public:
   virtual double area();
   virtual double perimeter();
 };
+
+#endif

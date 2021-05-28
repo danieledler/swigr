@@ -1,5 +1,5 @@
 #include "Shape.h"
-#define M_PI 3.14159265358979323846
+#include "utils/math.h"
 
 //' Move the shape to a new location
 //' @param dx Change in x
@@ -13,14 +13,14 @@ void Shape::move(double dx, double dy) {
 int Shape::nshapes = 0;
 
 double Circle::area() {
-  return M_PI*radius*radius;
+  return circle_area(radius);
 }
 
 //' The perimeter of the circle
 //' @return The perimeter
 //' @export
 double Circle::perimeter() {
-  return 2*M_PI*radius;
+  return circle_perimeter(radius);
 }
 
 double Square::area() {

@@ -4,6 +4,8 @@
 #include "Shape.h"
 %}
 
+%include "math.i"
+
 /* Let's just grab the original header file here */
 %include "Shape.h"
 
