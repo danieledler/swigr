@@ -1,6 +1,6 @@
 CXXFLAGS=-std=c++14 -O0 -g
 
-.PHONY: build create document build-binary repackage install test-R clean
+.PHONY: build create document build-binary repackage install test-R demo clean
 
 # swigr: src/Shape.cpp src/utils/math.cpp
 # 	g++ -std=c++11 $^ -o $@ 
@@ -28,13 +28,17 @@ document:
 	R --no-save -e 'library(devtools); library(roxygen2); document()'
 
 build-binary:
-	mkdir -p tmp/binary
-	R --no-save -e 'library(devtools); devtools::build(pkg = ".", path = "./tmp/binary", binary = T)'
-	
+	mkdir -p dist
+	R --no-save -e 'library(devtools); usethis::use_vignette("introduction"); devtools::document(); devtools::build(pkg = ".", path = "./dist", binary = T)'
+	tar -xzvf dist/swigr_0.0.2.tgz -C dist
+	cp -r man dist/swigr/
+	cd dist && tar -czvf swigr_0.0.2.tgz swigr
+
 repackage:
-	tar -xzvf tmp/binary/swigr_0.0.1.tgz -C tmp/binary
-	cp -r man tmp/binary/swigr/
-	tar -czvf tmp/binary/swigr_0.0.1_man.tgz tmp/binary/swigr
+	tar -xzvf dist/swigr_0.0.2.tgz -C dist
+	cp -r man dist/swigr/
+	cd dist && tar -czvf swigr_0.0.2.tgz swigr
+
 
 install:
 	cd .. && R --no-save -e 'devtools::install("swigr")'
@@ -43,5 +47,8 @@ test-R:
 	pwd
 	cd $(R_PACKAGE) && R --no-save -e 'library(devtools); library(roxygen2); load_all(); test()'
 
+demo:
+	Rscript demo/runme.R
+
 clean:
-	$(RM) src/*.so src/*.o src/*.R src/*_wrap.cpp
+	$(RM) src/*.so src/*.o src/*.R src/*_wrap.cpp dist
