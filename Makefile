@@ -6,7 +6,8 @@ CXXFLAGS=-std=c++14 -O0 -g
 # 	g++ -std=c++11 $^ -o $@ 
 
 swigr: src/Shape.o src/utils/math.o
-	g++ $(LDFLAGS) -o swigr src/Shape.o src/utils/math.o
+	# g++ $(LDFLAGS) -o swigr src/Shape.o src/utils/math.o
+	@true
 
 src/Shape.o: src/Shape.cpp src/Shape.h
 	g++ $(CXXFLAGS) -c src/Shape.cpp -o $@
@@ -21,6 +22,9 @@ src/Shape_wrap.cpp:
 	swig -c++ -r -o src/swigr_wrap.cpp src/Shape.i
 	@mv src/swigr.R R/
 
+init-R:
+	R --no-save -e 'install.packages("devtools", repos = "https://ftp.acc.umu.se/mirror/CRAN/"); install.packages("rmarkdown", repos = "https://ftp.acc.umu.se/mirror/CRAN/");'
+
 create:
 	cd .. && R --no-save -e 'devtools::create("swigr")'
 
@@ -29,7 +33,7 @@ document:
 
 build-binary:
 	mkdir -p dist
-	R --no-save -e 'library(devtools); usethis::use_vignette("introduction"); devtools::document(); devtools::build(pkg = ".", path = "./dist", binary = T)'
+	R --no-save -e 'library(devtools); usethis::use_vignette("introduction"); devtools::document(roclets = c('rd', 'collate', 'namespace', 'vignette')); devtools::build(pkg = ".", path = "./dist", binary = T, args = c('--preclean'))'
 	tar -xzvf dist/swigr_0.0.2.tgz -C dist
 	cp -r man dist/swigr/
 	cd dist && tar -czvf swigr_0.0.2.tgz swigr
