@@ -1,6 +1,6 @@
 CXXFLAGS=-std=c++14 -O0 -g
 
-.PHONY: build create document build-binary repackage install test-R demo clean
+.PHONY: build create document build-binary repackage install test-R demo docker-build-rstudio docker-run-rstudio clean
 
 # swigr: src/Shape.cpp src/utils/math.cpp
 # 	g++ -std=c++11 $^ -o $@ 
@@ -49,6 +49,12 @@ test-R:
 
 demo:
 	Rscript demo/runme.R
+
+docker-build-rstudio: Makefile Dockerfile
+	DOCKER_BUILDKIT=0 COMPOSE_DOCKER_CLI_BUILD=0 docker build -f Dockerfile -t danieledler/swigr:rstudio .
+
+docker-run-rstudio: Makefile
+	docker run -e PASSWORD=1234 -p 8787:8787 --rm danieledler/swigr:rstudio
 
 clean:
 	$(RM) src/*.so src/*.o src/*.R src/*_wrap.cpp dist
