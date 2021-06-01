@@ -5,7 +5,7 @@
 # the SWIG interface file instead.
 
 ##   Generated via the command line invocation:
-##	 swig -c++ -r -o src/swigr_wrap.cpp src/Shape.i
+##	 swig -c++ -r -o src/swigr.cpp src/Shape.i
 
 
 #                         srun.swg                            #

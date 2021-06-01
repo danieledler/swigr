@@ -5,8 +5,10 @@
 # source("example.R")
 # cacheMetaData(1)
 
-# search()
+search()
 #detach(package:swig, unload = TRUE)
+
+sessionInfo()
 
 install.packages("devtools")
 library(devtools)
@@ -16,7 +18,8 @@ library(devtools)
 
 # Install source bundle from URL
 # devtools::install_url("file:///Users/Daniel/dev/projects/swigr/tmp/binary2/swigr_0.0.1.tgz")
-devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.2/swigr_0.0.2.tgz")
+#devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.2/swigr_0.0.2.tgz")
+devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.2/swigr_0.0.2.tgz", force = T)
 
 # Install binary bundle from URL
 #devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0.0.1/swigr_0.0.1.tgz")
@@ -24,7 +27,7 @@ devtools::install_url("https://github.com/danieledler/swigr/releases/download/v0
 
 
 #swigr::test_r()
-# swigr::test_example()
+swigr::test_example()
 
 # ----- Object creation -----
 

@@ -15,11 +15,11 @@ src/Shape.o: src/Shape.cpp src/Shape.h
 src/utils/math.o: src/utils/math.cpp src/utils/math.h
 	g++ $(CXXFLAGS) -c src/utils/math.cpp -o $@
 
-build: src/Shape_wrap.cpp
-	R CMD SHLIB -o src/Shape.so src/swigr_wrap.cpp src/Shape.cpp
+build: src/swigr.cpp
+	R CMD SHLIB -o src/swigr.so src/swigr.cpp src/Shape.cpp src/utils/math.cpp
 
-src/Shape_wrap.cpp:
-	swig -c++ -r -o src/swigr_wrap.cpp src/Shape.i
+src/swigr.cpp:
+	swig -c++ -r -o src/swigr.cpp src/Shape.i
 	@mv src/swigr.R R/
 
 init-R:
@@ -33,16 +33,15 @@ document:
 
 build-binary:
 	mkdir -p dist
-	R --no-save -e 'library(devtools); usethis::use_vignette("introduction"); devtools::document(roclets = c('rd', 'collate', 'namespace', 'vignette')); devtools::build(pkg = ".", path = "./dist", binary = T, args = c('--preclean'))'
-	tar -xzvf dist/swigr_0.0.2.tgz -C dist
-	cp -r man dist/swigr/
-	cd dist && tar -czvf swigr_0.0.2.tgz swigr
+	R --no-save < build.R
 
 repackage:
 	tar -xzvf dist/swigr_0.0.2.tgz -C dist
 	cp -r man dist/swigr/
 	cd dist && tar -czvf swigr_0.0.2.tgz swigr
 
+test-remote-binary:
+	R --no-save < test.R
 
 install:
 	cd .. && R --no-save -e 'devtools::install("swigr")'
@@ -60,5 +59,8 @@ docker-build-rstudio: Makefile Dockerfile
 docker-run-rstudio: Makefile
 	docker run -e PASSWORD=1234 -p 8787:8787 --rm danieledler/swigr:rstudio
 
+clean-binary:
+	$(RM) -r src/*.o dist
+
 clean:
-	$(RM) src/*.so src/*.o src/*.R src/*_wrap.cpp dist
+	$(RM) -r src/*.so src/*.o src/utils/*.o src/*.R src/*_wrap.cpp dist
